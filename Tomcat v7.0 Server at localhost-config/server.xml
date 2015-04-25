@@ -56,10 +56,10 @@
 		<!-- Define a SSL HTTP/1.1 Connector on port 8443 This connector uses the 
 			JSSE configuration, when using APR, the connector should be using the OpenSSL 
 			style configuration described in the APR documentation -->
-		<Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
-			maxThreads="150" scheme="https" secure="true" clientAuth="false"
-			sslProtocol="TLS" keystoreFile="/home/.eclipseapiscolkeystore"
-			keystorePass="apiscolssh" />
+		<Connector SSLEnabled="true" clientAuth="false"
+			keystoreFile="/home/.eclipseapiscolkeystore" keystorePass="joachim"
+			maxThreads="150" port="8443" protocol="HTTP/1.1" scheme="https"
+			secure="true" sslProtocol="TLS" />
 
 		<!-- Define an AJP 1.3 Connector on port 8009 -->
 		<!-- <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" /> -->
@@ -102,15 +102,16 @@
 					directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log."
 					suffix=".txt" />
 				<Context
-					docBase="/home/joachim/workspace_scoladoc/ApiScol_Test_UI/WebContent"
+					docBase="/home/joachim/Developpements/workspace_scoladoc/ApiScol_Test_UI/WebContent"
 					path="/tests" />
 				<Context docBase="/home/resources" path="/content/resources"
 					reloadable="false" />
-				<Context docBase="/home/meta" path="/meta/lom" reloadable="false"
-					cachingAllowed="true" />
-				<Context docBase="/home/meta" path="/meta/lom/nocache"
-					reloadable="false" cachingAllowed="false" />
-				<Context docBase="/home/joachim/workspace_scoladoc/ApiScol_CDN/icons"
+				<Context cachingAllowed="true" docBase="/home/meta" path="/meta/lom"
+					reloadable="false" />
+				<Context cachingAllowed="false" docBase="/home/meta" path="/meta/lom/nocache"
+					reloadable="false" />
+				<Context
+					docBase="/home/joachim/Developpements/workspace_scoladoc/ApiScol_CDN/icons"
 					path="/meta/icons" reloadable="false" />
 				<Context docBase="/home/thumbs" path="/thumbs/files"
 					reloadable="false" />
@@ -118,41 +119,50 @@
 					reloadable="false" />
 				<Context docBase="/home/output" path="/previews/output"
 					reloadable="false" />
-				<Context docBase="/home/joachim/workspace_scoladoc/ApiScol_CDN"
+				<Context
+					docBase="/home/joachim/Developpements/workspace_scoladoc/ApiScol_CDN"
 					path="/cdn" reloadable="false" />
 				<Context
-					docBase="/home/joachim/workspace_scoladoc/ApiScol_Content/WebContent/img"
+					docBase="/home/joachim/Developpements/workspace_scoladoc/ApiScol_Content/WebContent/img"
 					path="/content/img" reloadable="false" />
 				<Context
-					docBase="/home/joachim/workspace_scoladoc/ApiScol_Content/WebContent/css"
+					docBase="/home/joachim/Developpements/workspace_scoladoc/ApiScol_Content/WebContent/css"
 					path="/content/css" reloadable="false" />
 				<Context
-					docBase="/home/joachim/workspace_scoladoc/ApiScol_Meta/WebContent/css"
+					docBase="/home/joachim/Developpements/workspace_scoladoc/ApiScol_Meta/WebContent/css"
 					path="/meta/css" reloadable="false" />
-				<Context docBase="/home/joachim/workspace_scoladoc/ApiScol_Display"
+				<Context
+					docBase="/home/joachim/Developpements/workspace_scoladoc/ApiScol_Display"
 					path="/display" reloadable="true" />
 
-				<Context docBase="ApiScol_Content" path="/content"
-					reloadable="true" source="org.eclipse.jst.jee.server:ApiScol_Content" />
-				<Context docBase="ApiScol_Edit" path="/edit" reloadable="true"
-					source="org.eclipse.jst.jee.server:ApiScol_Edit" />
+
+
+
+
+
+
+
+				<Context crossContext="true"
+					docBase="/home/joachim/Developpements/workspace_scoladoc/Scolr/solr-4.2.1.war"
+					path="/solr">
+					<Environment name="solr/home" override="true"
+						type="java.lang.String" value="/home/joachim/Developpements/workspace_scoladoc/Scolr/solr" />
+				</Context>
+
 				<Context docBase="ApiScol_Meta" path="/meta" reloadable="true"
 					source="org.eclipse.jst.jee.server:ApiScol_Meta" />
 				<Context docBase="ApiScol_Seek" path="/seek" reloadable="true"
 					source="org.eclipse.jst.jee.server:ApiScol_Seek" />
-				<Context docBase="ApiScol_Thumbs" path="/thumbs" reloadable="true"
-					source="org.eclipse.jst.jee.server:ApiScol_Thumbs" />
-				<Context docBase="ApiScol_Pack" path="/pack" reloadable="true"
-					source="org.eclipse.jst.jee.server:ApiScol_Pack" />
-
-				<Context crossContext="true"
-					docBase="/home/joachim/workspace_scoladoc/Scolr/solr-4.2.1.war"
-					path="/solr">
-					<Environment name="solr/home" override="true"
-						type="java.lang.String" value="/home/joachim/workspace_scoladoc/Scolr/solr" />
-				</Context>
+				<Context docBase="ApiScol_Edit" path="/edit" reloadable="true"
+					source="org.eclipse.jst.jee.server:ApiScol_Edit" />
 				<Context docBase="ApiScol_Previews" path="/previews"
 					reloadable="true" source="org.eclipse.jst.jee.server:ApiScol_Previews" />
+				<Context docBase="ApiScol_Pack" path="/pack" reloadable="true"
+					source="org.eclipse.jst.jee.server:ApiScol_Pack" />
+				<Context docBase="ApiScol_Content" path="/content"
+					reloadable="true" source="org.eclipse.jst.jee.server:ApiScol_Content" />
+				<Context docBase="ApiScol_Thumbs" path="/thumbs" reloadable="true"
+					source="org.eclipse.jst.jee.server:ApiScol_Thumbs" />
 			</Host>
 
 
